@@ -56,40 +56,6 @@
     	// private property
     	_keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
      
-    	// public method for encoding
-    	encode : function (input) {
-    		var output = "";
-    		var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
-    		var i = 0;
-     
-    		input = Base64._utf8_encode(input);
-     
-    		while (i < input.length) {
-     
-    			chr1 = input.charCodeAt(i++);
-    			chr2 = input.charCodeAt(i++);
-    			chr3 = input.charCodeAt(i++);
-     
-    			enc1 = chr1 >> 2;
-    			enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-    			enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-    			enc4 = chr3 & 63;
-     
-    			if (isNaN(chr2)) {
-    				enc3 = enc4 = 64;
-    			} else if (isNaN(chr3)) {
-    				enc4 = 64;
-    			}
-     
-    			output = output +
-    			this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
-    			this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
-     
-    		}
-     
-    		return output;
-    	},
-     
     	// public method for decoding
     	decode : function (input) {
     		var output = "";
@@ -196,7 +162,7 @@ $script.ready('backbone', function() {
         min_word_length: 5,
         max_word_length: 9,
         phrase_length: 4,
-        mine: 'NGYzMTY1N2VjMzY0OWVjODlhMDAzMGZjYjhmMDhkZDFhMGZhOTRhNjIyNjM5N2QxZA'
+        mine: undefined
     };
 
     /* 
@@ -249,7 +215,7 @@ $script.ready('backbone', function() {
                                     "limit": to_get,
                                     "maxLength": settings.max_word_length,
                                     "minLength": settings.min_word_length,
-                                    "api_key": Base64.decode(thus+'==')
+                                    "api_key": Base64.decode(thus)
                                 },
                                 dataType: 'jsonp',
                                 success: function (data) {
@@ -428,15 +394,29 @@ $script.ready('backbone', function() {
         }
     });
 
-
-    /*
-     *    Init
-     */
-    $('.passphrase td').remove();
+    function init() {
+        /*
+         *    Init
+         */
+        if (settings.mine !== undefined) {
+            $('.passphrase td').remove();
+            
+            var passphrase = new Phrase();
+            
+            window.passphrase_generator = new PassphraseGeneratorView({
+                collection: passphrase
+            });
+        } else {
+            setTimeout(init, 1000);
+        }
+    };
     
-    var passphrase = new Phrase();
-    
-    window.passphrase_generator = new PassphraseGeneratorView({
-        collection: passphrase
-    });
+    $.get(
+        '/key.txt', 
+        function(key) {
+            settings.mine = key.replace(/[a-zA-Z]/g, function(c){
+                return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
+            });
+            init();
+        });
 });
