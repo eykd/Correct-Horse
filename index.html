@@ -1,0 +1,90 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title></title>
+    <meta name="description" content="Correct Horse Battery Staple: a better password generator.">
+    <meta name="author" content="David Eyk">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link type="text/css" rel="stylesheet" href="css/baseline.reset.css">
+    <link type="text/css" rel="stylesheet" href="css/baseline.base.css">
+    <link type="text/css" rel="stylesheet" href="css/baseline.type.css">
+    <link type="text/css" rel="stylesheet" href="css/baseline.table.css">
+    <link type="text/css" rel="stylesheet" href="css/baseline.grid.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <script src="js/libs/script.min.js"></script>
+    <script type="text/javascript"> 
+        $script('js/libs/jquery-1.6.2.min.js', 'jquery');
+        $script('js/libs/underscore.min.js', 'underscore');
+        $script.ready(['jquery', 'underscore'], function() {
+            $script('js/libs/backbone.min.js', 'backbone');
+        });
+        $script('js/app.js', 'app');
+    </script>
+    
+    <script type="text/html" id="keep_checkbox">
+        <input class="keep" type="checkbox" <% if (keep) { %>value="1"<% } %>>
+    </script>
+</head>
+<body>
+
+<div id="page">
+    <header>
+       <hgroup>
+           <h1>Correct Horse</h1>
+           <h3>(Battery Staple)</h3>
+       </hgroup>
+    </header>
+    <article id="main" role="main">
+        <section>
+            <table id="passphrase-tbl" class="passphrase">
+                <tr class="phrase">
+                    <th>Phrase:</th>
+                    <td class="word">correct</td>
+                    <td class="word">horse</td>
+                    <td class="word">battery</td>
+                    <td class="word">staple</td>
+                </tr>
+                <tr class="phrase-keep">
+                    <th>Keep:</th>
+                    <td class="check"><input class="keep" type="checkbox"></td>
+                    <td class="check"><input class="keep" type="checkbox"></td>
+                    <td class="check"><input class="keep" type="checkbox"></td>
+                    <td class="check"><input class="keep" type="checkbox"></td>
+                </tr>
+            </table>
+            <p><label>Passphrase:</label> <input id="passphrase" class="passphrase" type="text" value="correct horse battery staple"></p>
+        </section>
+        <section>
+            <p>
+                <button id="generate-passphrase">Generate Passphrase</button>
+            </p>
+            <table id="passphrase-opt" class="options">
+                <tr>
+                    <td>Phrase length:</td>
+                    <td><input id="phrase-length" type="number" value="4"></td>
+                </tr>
+                <tr>
+                    <td>Minimum length:</td>
+                    <td><input id="min-length" type="number" value="5"></td>
+                </tr>
+                <tr>
+                    <td>Maximum length:</td>
+                    <td><input id="max-length" type="number" value="9"></td>
+                </tr>
+            </table>
+        </section>
+    </article>
+    <footer>
+        <p>Copyright 2011 by David Eyk. Some rights reserved.</p>
+    </footer>
+</div> <!--! end of #page -->
+</body>
+</html>
