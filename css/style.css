@@ -177,6 +177,14 @@ input.passphrase {
 table.options {
     width: auto;
 }
+.license {
+    margin-top: 1em;
+    text-indent: 0;
+}
+.license img {
+    float: left;
+    padding-right: 1em;
+}
 
 
 

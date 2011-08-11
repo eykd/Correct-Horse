@@ -8,6 +8,12 @@
   Twitter: @eykd
 
 /* THANKS */
+  For the inspiration:
+    http://xkcd.com/936/
+
+  For the API:
+    http://wordnik.com
+
   For their great code:
     Paul Irish
     Dustin Diaz

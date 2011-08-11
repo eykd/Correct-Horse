@@ -1,4 +1,12 @@
 /*
+      Correct Horse (Battery Staple) -- a better password generator.
+      
+      See http://xkcd.com/936/ for an explanation.
+
+      This is a Backbone.js app, with probably a lot more fanciness than it needs.
+ */
+
+/*
  *    Utilities
  */
  
